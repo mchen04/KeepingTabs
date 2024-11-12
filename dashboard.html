@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>KeepingTabs Dashboard</title>
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-left">
+                <img src="assets/logo.png" alt="KeepingTabs" class="logo">
+                <h1>Tab Management Dashboard</h1>
+            </div>
+            <div class="header-right">
+                <div class="view-toggle">
+                    <button class="view-button active" id="defaultView">
+                        <i class="fas fa-th-large"></i> Default View
+                    </button>
+                    <button class="view-button" id="whiteboardView">
+                        <i class="fas fa-columns"></i> Whiteboard View
+                    </button>
+                </div>
+                <div class="theme-toggle">
+                    <input type="checkbox" id="theme-switch" class="theme-switch">
+                    <label for="theme-switch" class="theme-switch-label">
+                        <span class="theme-switch-inner"></span>
+                    </label>
+                </div>
+                <nav class="main-nav">
+                    <a href="#" class="nav-link" id="settingsButton">Settings</a>
+                    <a href="#" class="nav-link" id="helpButton">Help</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Categories Sidebar -->
+            <aside class="categories-sidebar">
+                <div class="categories-header">
+                    <h2>Categories</h2>
+                    <button class="add-category-btn" id="addCategory">
+                        <i class="fas fa-plus"></i> Add Category
+                    </button>
+                </div>
+                <div class="categories-list" id="categoriesList">
+                    <!-- Categories will be dynamically populated -->
+                </div>
+            </aside>
+
+            <!-- Tab Display Area -->
+            <main class="tab-display">
+                <div class="category-tabs" id="categoryTabs">
+                    <!-- Tabs will be dynamically populated -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Category Template -->
+    <template id="categoryTemplate">
+        <div class="category-item">
+            <div class="category-header">
+                <span class="category-color"></span>
+                <span class="category-name"></span>
+                <div class="category-actions">
+                    <button class="category-action freeze-btn">
+                        <i class="fas fa-snowflake"></i>
+                    </button>
+                    <button class="category-action edit-btn">
+                        <i class="fas fa-pencil-alt"></i>
+                    </button>
+                    <button class="category-action delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Tab Card Template -->
+    <template id="tabCardTemplate">
+        <div class="tab-card">
+            <div class="tab-icon"></div>
+            <div class="tab-info">
+                <div class="tab-title"></div>
+                <div class="tab-preview">
+                    <div class="preview-content">
+                        <p class="ai-summary">AI Summary Placeholder</p>
+                    </div>
+                    <div class="tab-actions">
+                        <button class="tab-action edit-name">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="tab-action change-category">
+                            <i class="fas fa-folder"></i>
+                        </button>
+                        <button class="tab-action freeze-tab">
+                            <i class="fas fa-snowflake"></i>
+                        </button>
+                        <button class="tab-action delete-tab">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="js/dashboard.js" type="module"></script>
+</body>
+</html>

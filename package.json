@@ -1,0 +1,18 @@
+{
+  "name": "keepingtabs",
+  "version": "1.0.0",
+  "description": "AI-Powered Study Organizer Chrome Extension",
+  "scripts": {
+    "build": "npm run build:icons && npm run build:zip",
+    "build:icons": "for size in 16 48 128; do inkscape -w $size -h $size assets/icon$size.svg -o assets/icon$size.png; done",
+    "build:zip": "zip -r keepingtabs.zip . -x '*.git*' 'node_modules/*' '*.zip' 'package*.json'",
+    "dev": "web-ext run --source-dir=.",
+    "lint": "web-ext lint"
+  },
+  "devDependencies": {
+    "web-ext": "^7.11.0"
+  },
+  "private": true,
+  "author": "",
+  "license": "MIT"
+}

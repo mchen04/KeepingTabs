@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="128" height="128" rx="24" fill="#4A90E2"/>
+    <g filter="url(#shadow)">
+        <!-- Stacked tabs representation -->
+        <rect x="24" y="64" width="80" height="48" rx="8" fill="white" opacity="0.9"/>
+        <rect x="24" y="44" width="80" height="48" rx="8" fill="white" opacity="0.95"/>
+        <rect x="24" y="24" width="80" height="48" rx="8" fill="white"/>
+        
+        <!-- Organization lines -->
+        <path d="M36 40H92" stroke="#4A90E2" stroke-width="4" stroke-linecap="round"/>
+        <path d="M36 52H76" stroke="#4A90E2" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Filter for shadow effect -->
+    <defs>
+        <filter id="shadow" x="0" y="0" width="128" height="128" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dy="2"/>
+            <feGaussianBlur stdDeviation="2"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+        </filter>
+    </defs>
+</svg>

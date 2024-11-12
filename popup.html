@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>KeepingTabs</title>
+    <link rel="stylesheet" href="styles/popup.css">
+</head>
+<body>
+    <div class="popup-container">
+        <div class="header">
+            <img src="assets/logo.png" alt="KeepingTabs" class="logo">
+            <div class="theme-toggle">
+                <input type="checkbox" id="theme-switch" class="theme-switch">
+                <label for="theme-switch" class="theme-switch-label">
+                    <span class="theme-switch-inner"></span>
+                </label>
+            </div>
+        </div>
+        <div class="quick-actions">
+            <button id="openDashboard" class="primary-button">Open Full Dashboard</button>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">Open Tabs</span>
+                    <span class="stat-value" id="tabCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Categories</span>
+                    <span class="stat-value" id="categoryCount">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/popup.js"></script>
+</body>
+</html>
