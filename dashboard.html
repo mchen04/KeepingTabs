@@ -110,6 +110,24 @@
         </div>
     </template>
 
+    <!-- Category Selection Modal Template -->
+    <div class="modal-overlay" id="categoryModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Change Category</h3>
+            </div>
+            <div class="modal-content">
+                <select class="modal-select" id="categorySelect">
+                    <!-- Categories will be dynamically populated -->
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-button cancel" id="cancelCategoryChange">Cancel</button>
+                <button class="modal-button confirm" id="confirmCategoryChange">Confirm</button>
+            </div>
+        </div>
+    </div>
+
     <script src="js/dashboard.js" type="module"></script>
 </body>
 </html>

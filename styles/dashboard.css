@@ -29,6 +29,126 @@ body {
     overflow: hidden;
 }
 
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background-color: var(--background-light);
+    border-radius: 12px;
+    padding: 24px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-20px);
+    transition: transform 0.3s;
+}
+
+.modal-overlay.active .modal {
+    transform: translateY(0);
+}
+
+.modal-header {
+    margin-bottom: 16px;
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.modal-content {
+    margin-bottom: 24px;
+}
+
+.modal-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    background-color: var(--background-light);
+    color: var(--text-light);
+    font-size: 14px;
+    appearance: none;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.modal-select:hover {
+    border-color: var(--primary-color);
+}
+
+.modal-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.modal-button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-button.cancel {
+    background: none;
+    border: 1px solid var(--border-light);
+    color: var(--text-light);
+}
+
+.modal-button.confirm {
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+}
+
+.modal-button:hover {
+    opacity: 0.9;
+}
+
+/* Dark theme modal styles */
+body.dark-theme .modal {
+    background-color: var(--background-dark);
+}
+
+body.dark-theme .modal-select {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+    border-color: var(--border-dark);
+}
+
+body.dark-theme .modal-button.cancel {
+    border-color: var(--border-dark);
+    color: var(--text-dark);
+}
+
+/* Rest of existing styles... */
 .app-container {
     display: flex;
     flex-direction: column;

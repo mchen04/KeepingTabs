@@ -2,6 +2,12 @@ import { getCategoryById, getAllCategories } from './categories.js';
 
 const tabCardTemplate = document.getElementById('tabCardTemplate');
 const tabDisplay = document.querySelector('.tab-display');
+const categoryModal = document.getElementById('categoryModal');
+const categorySelect = document.getElementById('categorySelect');
+const cancelCategoryChange = document.getElementById('cancelCategoryChange');
+const confirmCategoryChange = document.getElementById('confirmCategoryChange');
+
+let activeTabId = null;
 
 export async function initializeTabs() {
     const tabs = await chrome.tabs.query({});
@@ -10,6 +16,28 @@ export async function initializeTabs() {
     // Group tabs by category
     const categorizedTabs = await categorizeTabs(tabs, tabCategories);
     renderTabs(categorizedTabs);
+
+    // Set up modal event listeners
+    setupModalListeners();
+}
+
+function setupModalListeners() {
+    cancelCategoryChange.addEventListener('click', () => {
+        categoryModal.classList.remove('active');
+        activeTabId = null;
+    });
+
+    confirmCategoryChange.addEventListener('click', async () => {
+        const newCategoryId = categorySelect.value;
+        if (activeTabId && newCategoryId) {
+            const { tabCategories = {} } = await chrome.storage.sync.get('tabCategories');
+            tabCategories[activeTabId] = newCategoryId;
+            await chrome.storage.sync.set({ tabCategories });
+            initializeTabs();
+        }
+        categoryModal.classList.remove('active');
+        activeTabId = null;
+    });
 }
 
 async function categorizeTabs(tabs, tabCategories) {
@@ -127,18 +155,15 @@ async function editTabName(tabId) {
 
 async function changeTabCategory(tabId, currentCategoryId) {
     const categories = await getAllCategories();
-    const categoryOptions = categories
+    
+    // Populate select options
+    categorySelect.innerHTML = categories
         .map(c => `<option value="${c.id}"${c.id === currentCategoryId ? ' selected' : ''}>${c.name}</option>`)
         .join('');
     
-    const newCategoryId = prompt('Select new category:\n' + categories.map((c, i) => `${i + 1}: ${c.name}`).join('\n'));
-    
-    if (newCategoryId && categories[newCategoryId - 1]) {
-        const { tabCategories = {} } = await chrome.storage.sync.get('tabCategories');
-        tabCategories[tabId] = categories[newCategoryId - 1].id;
-        await chrome.storage.sync.set({ tabCategories });
-        initializeTabs();
-    }
+    // Show modal and store active tab ID
+    activeTabId = tabId;
+    categoryModal.classList.add('active');
 }
 
 async function toggleTabFreeze(tabId, categoryId) {
