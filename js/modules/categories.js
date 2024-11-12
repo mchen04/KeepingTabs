@@ -16,7 +16,40 @@ const categoriesList = document.getElementById('categoriesList');
 
 export async function initializeCategories() {
     const { categories = [] } = await chrome.storage.sync.get('categories');
-    renderCategories(categories);
+    
+    // Create default categories if none exist
+    if (categories.length === 0) {
+        const defaultCategories = [
+            {
+                id: Date.now().toString(),
+                name: 'Homework',
+                color: DEFAULT_COLORS[0],
+                frozen: false
+            },
+            {
+                id: (Date.now() + 1).toString(),
+                name: 'Misc',
+                color: DEFAULT_COLORS[1],
+                frozen: false
+            },
+            {
+                id: (Date.now() + 2).toString(),
+                name: 'Extracurriculars',
+                color: DEFAULT_COLORS[2],
+                frozen: false
+            },
+            {
+                id: (Date.now() + 3).toString(),
+                name: 'Research',
+                color: DEFAULT_COLORS[3],
+                frozen: false
+            }
+        ];
+        await chrome.storage.sync.set({ categories: defaultCategories });
+        renderCategories(defaultCategories);
+    } else {
+        renderCategories(categories);
+    }
 
     // Set up add category button
     document.getElementById('addCategory').addEventListener('click', () => {
