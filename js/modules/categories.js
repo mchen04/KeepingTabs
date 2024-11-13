@@ -57,22 +57,30 @@ export async function initializeCategories() {
     });
 }
 
-function renderCategories(categories) {
+async function renderCategories(categories) {
     categoriesList.innerHTML = '';
+    const { tabCategories = {} } = await chrome.storage.sync.get('tabCategories');
+    
+    // Count tabs per category
+    const tabCounts = {};
+    Object.values(tabCategories).forEach(categoryId => {
+        tabCounts[categoryId] = (tabCounts[categoryId] || 0) + 1;
+    });
+
     categories.forEach((category, index) => {
-        const categoryElement = createCategoryElement(category, index);
+        const categoryElement = createCategoryElement(category, index, tabCounts[category.id] || 0);
         categoriesList.appendChild(categoryElement);
     });
 }
 
-function createCategoryElement(category, index) {
+function createCategoryElement(category, index, tabCount) {
     const element = categoryTemplate.content.cloneNode(true);
     const categoryItem = element.querySelector('.category-item');
     
     // Set category data
     categoryItem.dataset.id = category.id;
     categoryItem.querySelector('.category-color').style.backgroundColor = category.color;
-    categoryItem.querySelector('.category-name').textContent = category.name;
+    categoryItem.querySelector('.category-name').textContent = `${category.name} (${tabCount})`;
 
     // Set frozen state if applicable
     if (category.frozen) {
